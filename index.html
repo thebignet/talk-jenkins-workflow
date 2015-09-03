@@ -1,504 +1,535 @@
-		<!doctype html>
-		<html lang="en">
+<!doctype html>
+<html lang="en">
 
-		<head>
-			<meta charset="utf-8">
+<head>
+	<meta charset="utf-8">
 
-			<title>reveal.js - The HTML Presentation Framework</title>
+	<title>Jenkins Workflow</title>
 
-			<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-			<meta name="author" content="Hakim El Hattab">
+	<meta name="description" content="Slides presenting the Jenkins Workflow Plugin">
+	<meta name="author" content="Jean Detoeuf">
 
-			<meta name="apple-mobile-web-app-capable" content="yes" />
-			<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-			<link rel="stylesheet" href="css/reveal.css">
-			<link rel="stylesheet" href="css/theme/black.css" id="theme">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css" id="theme">
 
-			<!-- Code syntax highlighting -->
-			<link rel="stylesheet" href="lib/css/zenburn.css">
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
 
-			<!-- Printing and PDF exports -->
-			<script>
-				var link = document.createElement( 'link' );
-				link.rel = 'stylesheet';
-				link.type = 'text/css';
-				link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-				document.getElementsByTagName( 'head' )[0].appendChild( link );
-			</script>
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
 
-				<!--[if lt IE 9]>
-				<script src="lib/js/html5shiv.js"></script>
-				<![endif]-->
-			</head>
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
 
-			<body>
-
-				<div class="reveal">
-
-					<!-- Any section element inside of this container is displayed as a slide -->
-					<div class="slides">
-						<section>
-							<div>
-								<div>
-									<h1>Jenkins Workflow</h1>
-								</div>
-							</div>
-						</section>
-						<section>
-							<div>
-								<div>
-									<h1>Jean Detoeuf</h1>
-								</div>
-							</div>
-							<div>
-								<div>
-									<h2>Concepteur-développeur</h2>
-								</div>
-							</div>
-							<div>
-								<div>
-									<p>Passionné de nouvelles technologies</p>
-									<p>#jvm #docker #craftmanship #diy</p>
-								</div>
-							</div>
-							<div>
-								<div>
-									<p>Image d'Open</p>
-								</div>
-							</div>
-						</section>
-						<section>
-							<div>
-								<div>
-									<h2>Sondage</h2>
-								</div>
-							</div>
-							<div>
-								<div>
-									<ul>
-										<li>Intégration continue</li>
-										<li>Déploiement continu</li>
-									</ul>
-								</div>
-							</div>
-						</section>
-						<section>
-							<div>
-								<div>
-									<h2>Intégration Continue</h2>
-								</div>
-							</div>
-							<div>
-								<div>
-									<ul>
-										<li>Jenkins/Hudson</li>
-										<li>Go Delivery</li>
-										<li>Bamboo</li>
-										<li>Travis CI</li>
-										<li>Team City</li>
-										<li>Beaucoup d'autres</li>
-									</ul>
-								</div>
-							</div>
-						</section>
-						<section>
-							<div>
-								<div>
-									<h2>Pourquoi Jenkins ?</h2>
-								</div>
-							</div>
-							<div>
-								<div>
-									<ul>
-										<li class="fragment" data-fragment-index="0">CI le plus utilisé</li>
-										<li class="fragment" data-fragment-index="1">Extensible</li>
-										<li class="fragment" data-fragment-index="2">Stable</li>
-										<li class="fragment" data-fragment-index="3">Open Source</li>
-										<li class="fragment" data-fragment-index="4">Communauté</li>
-									</ul>
-								</div>
-							</div>
-							<div>
-								<div>
-									<p>image de jenkins</p>
-								</div>
-							</div>
-						</section>
-						<section>
-							<div>
-								<div>
-									<h2>Jobs classiques</h2>
-								</div>
-							</div>
-							<div>
-								<div>
-									<ul>
-										<li>Build</li>
-										<li>Tests unitaires</li>
-										<li>Tests d'intégration</li>
-										<li>Tests système</li>
-										<li>Deploy</li>
-									</ul>
-								</div>
-							</div>
-							<div>
-								<div>
-									<p>Image jobs classiques</p>
-								</div>
-							</div>
-						</section>
-						<section>
-							<div>
-								<div>
-									<h1>Comment enchaîner du build au deploy ?</h1>
-								</div>
-							</div>
-							<div>
-								<div>
-									<p>Histoire de faire du déploiement continu</p>
-								</div>
-							</div>
-						</section>
-						<section>
-							<div>
-								<div>
-									<h1>En chainant les jobs</h1>
-								</div>
-							</div>
-							<div>
-								<div>
-									<p>Image de la conf pour chainer un job</p>
-								</div>
-							</div>
-						</section>
-						<section>
-							<div>
-								<div>
-									<h1>Oui, mais pour suivre l'enchaînement ?</h1>
-								</div>
-							</div>
-						</section><section class="has-light-background" data-background-color="#ffe599"><div>
-						<div>
-							<h1>Avec le pipeline plugin !</h1>
-						</div>
-					</div>
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<div>
 					<div>
-						<div>
-							<p>image du pipeline plugin</p>
-						</div>
+						<h1>Jenkins Workflow</h1>
 					</div>
-				</section><section class="has-light-background" data-background-color="#e06666"><div>
-				<div>
-					<h2>Problème</h2>
 				</div>
-			</div>
+			</section>
+			<section class="has-light-background" data-background-color="#ffffff">
+				<div>
+					<div>
+						<h1>Jean Detoeuf</h1>
+					</div>
+				</div>
+				<div>
+					<div>
+						<h2>Concepteur-développeur</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p>Passionné de nouvelles technologies</p>
+						<p>#jvm #docker #craftmanship #diy</p>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p><img src="img/logo-open.png" width="400px" style="border:none; box-shadow:none; background: none;"/></p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h2>Sondage</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<ul>
+							<li>Intégration continue</li>
+							<li>Déploiement continu</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h2>Intégration Continue</h2>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h2>Jenkins/Hudson</h2>
+						<p><img src="img/CI/jenkins.png" width="400px" style="border:none; box-shadow:none; background: none;"/></p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<p><img src="img/CI/go.png" width="400px" style="border:none; box-shadow:none; background: none;"/></p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<p><img src="img/CI/bamboo.png" width="400px" style="border:none; box-shadow:none; background: none;"/></p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<p><img src="img/CI/travis.png" width="400px" style="border:none; box-shadow:none; background: none;"/></p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<p><img src="img/CI/teamcity.png" width="400px" style="border:none; box-shadow:none; background: none;"/></p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h2>Et beaucoup d'autres</h2>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h2>Pourquoi Jenkins ?</h2>
+						<p><img src="img/CI/jenkins.png" width="100px" style="border:none; box-shadow:none; background: none;"/></p>
+					</div>
+				</div>
+				<div>
+					<div>
+						<ul>
+							<li class="fragment" data-fragment-index="0">CI le plus utilisé</li>
+							<li class="fragment" data-fragment-index="1">Extensible</li>
+							<li class="fragment" data-fragment-index="2">Stable</li>
+							<li class="fragment" data-fragment-index="3">Open Source</li>
+							<li class="fragment" data-fragment-index="4">Communauté</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h2>Jobs classiques</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<ul>
+							<li>Build</li>
+							<li>Tests unitaires</li>
+							<li>Tests d'intégration</li>
+							<li>Tests système</li>
+							<li>Deploy</li>
+						</ul>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p>Image jobs classiques</p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h1>Comment enchaîner du build au deploy ?</h1>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p>Histoire de faire du déploiement continu</p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h1>En chainant les jobs</h1>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p>Image de la conf pour chainer un job</p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h1>Oui, mais pour suivre l'enchaînement ?</h1>
+					</div>
+				</div>
+			</section>
+			<section class="has-light-background" data-background-color="#ffe599">
+				<div>
+					<div>
+						<h1>Avec le pipeline plugin !</h1>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p>image du pipeline plugin</p>
+					</div>
+				</div>
+			</section>
+			<section class="has-light-background" data-background-color="#e06666">
+				<div>
+					<div>
+						<h2>Problème</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<ul>
+							<li>Complexe à mettre en oeuvre</li>
+							<li>On finit par avoir des jobs "étapes"</li>
+							<li>File d'exécution impossible à lire</li>
+							<li>Un job a des successeurs prédéterminés</li>
+							<li>Le paramétrage se fait dans Jenkins</li>
+						</ul>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p><span>Solution peu utilisable pour du déploiement continu</span></p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h1>Jenkins et le déploiement continu</h1>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h2>Déploiement Continu</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p>Le but du déploiement continu est d'avoir une application stable en production.</p>
+						<p>Pour ce faire, la chaine de livraison doit être automatisée au maximum pour réduire le travail entre une modification de code et sa livraison en production.</p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h2>Quel intervale de temps entre deux MEP ?</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p>Ce n'est pas le but premier du déploiement continu.</p>
+						<p>Pouvoir livrer <strong>rapidement</strong> ne veut pas dire livrer <strong>régulièrement</strong>.</p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h2>Go Delivery</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<ul>
+							<li>Un build est composé d'étapes</li>
+							<li>Chaque build peut être appliqué à un environnement</li>
+							<li>Fan-out-in (parallelisation des étapes)</li>
+						</ul>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p>Capture d'écran de Go Delivery</p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h2>Bonnes idées</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<ul>
+							<li>Parallelisation des étapes</li>
+							<li>Environnements de déploiement</li>
+							<li>Visualisation du build et de l'étape en cours</li>
+						</ul>
+					</div>
+				</div>
+				<div>
+					<div>
+						<h2>Problèmes</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<ul>
+							<li>Configuration gérée dans l'outil</li>
+							<li>Pas de possibilité de scripter le job</li>
+							<li>Difficulté pour gérer plusieurs versions nécessitant des jobs différents</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h1>Jenkins Workflow plugin</h1>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h2>Plugin(s)</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<ul>
+							<li>Ajout à une installation existante</li>
+							<li>Nouveau type de job</li>
+						</ul>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p>image de configuration de workflow</p>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h1>Scripter le job</h1>
+					</div>
+				</div>
+				<div>
+					<div>
+						<h2>et mettre le script avec les sources</h2>
+					</div>
+				</div>
+			</section><section class="has-light-background" data-background-color="#d9ead3"><div>
 			<div>
-				<div>
-					<ul>
-						<li>Complexe à mettre en oeuvre</li>
-						<li>On finit par avoir des jobs "étapes"</li>
-						<li>File d'exécution impossible à lire</li>
-						<li>Un job a des successeurs prédéterminés</li>
-						<li>Le paramétrage se fait dans Jenkins</li>
-					</ul>
-				</div>
+				<h2>Jenkinsfile</h2>
 			</div>
-			<div>
-				<div>
-					<p><span>Solution peu utilisable pour du déploiement continu</span></p>
-				</div>
-			</div>
-		</section>
-		<section>
-			<div>
-				<div>
-					<h1>Jenkins et le déploiement continu</h1>
-				</div>
-			</div>
-		</section>
-		<section>
-			<div>
-				<div>
-					<h2>Déploiement Continu</h2>
-				</div>
-			</div>
-			<div>
-				<div>
-					<p>Le but du déploiement continu est d'avoir une application stable en production.</p>
-					<p>Pour ce faire, la chaine de livraison doit être automatisée au maximum pour réduire le travail entre une modification de code et sa livraison en production.</p>
-				</div>
-			</div>
-		</section>
-		<section>
-			<div>
-				<div>
-					<h2>Quel intervale de temps entre deux MEP ?</h2>
-				</div>
-			</div>
-			<div>
-				<div>
-					<p>Ce n'est pas le but premier du déploiement continu.</p>
-					<p>Pouvoir livrer <strong>rapidement</strong> ne veut pas dire livrer <strong>régulièrement</strong>.</p>
-				</div>
-			</div>
-		</section>
-		<section>
-			<div>
-				<div>
-					<h2>Go Delivery</h2>
-				</div>
-			</div>
-			<div>
-				<div>
-					<ul>
-						<li>Un build est composé d'étapes</li>
-						<li>Chaque build peut être appliqué à un environnement</li>
-						<li>Fan-out-in (parallelisation des étapes)</li>
-					</ul>
-				</div>
-			</div>
-			<div>
-				<div>
-					<p>Capture d'écran de Go Delivery</p>
-				</div>
-			</div>
-		</section>
-		<section>
-			<div>
-				<div>
-					<h2>Bonnes idées</h2>
-				</div>
-			</div>
-			<div>
-				<div>
-					<ul>
-						<li>Parallelisation des étapes</li>
-						<li>Environnements de déploiement</li>
-						<li>Visualisation du build et de l'étape en cours</li>
-					</ul>
-				</div>
-			</div>
-			<div>
-				<div>
-					<h2>Problèmes</h2>
-				</div>
-			</div>
-			<div>
-				<div>
-					<ul>
-						<li>Configuration gérée dans l'outil</li>
-						<li>Pas de possibilité de scripter le job</li>
-						<li>Difficulté pour gérer plusieurs versions nécessitant des jobs différents</li>
-					</ul>
-				</div>
-			</div>
-		</section>
-		<section>
-			<div>
-				<div>
-					<h1>Jenkins Workflow plugin</h1>
-				</div>
-			</div>
-		</section>
-		<section>
-			<div>
-				<div>
-					<h2>Plugin(s)</h2>
-				</div>
-			</div>
-			<div>
-				<div>
-					<ul>
-						<li>Ajout à une installation existante</li>
-						<li>Nouveau type de job</li>
-					</ul>
-				</div>
-			</div>
-			<div>
-				<div>
-					<p>image de configuration de workflow</p>
-				</div>
-			</div>
-		</section>
-		<section>
-			<div>
-				<div>
-					<h1>Scripter le job</h1>
-				</div>
-			</div>
-			<div>
-				<div>
-					<h2>et mettre le script avec les sources</h2>
-				</div>
-			</div>
-		</section><section class="has-light-background" data-background-color="#d9ead3"><div>
-		<div>
-			<h2>Jenkinsfile</h2>
 		</div>
-	</div>
-	<div>
 		<div>
-			<p>Fichier de build en Groovy</p>
-			<p>Exprimer tout ce que pouvait faire un job simplement</p>
-			<p>Ajouter des principes supplémentaires</p>
-			<p>Convention de nommage pour éviter d'indiquer le nom en configuration du job</p>
+			<div>
+				<p>Fichier de build en Groovy</p>
+				<p>Exprimer tout ce que pouvait faire un job simplement</p>
+				<p>Ajouter des principes supplémentaires</p>
+				<p>Convention de nommage pour éviter d'indiquer le nom en configuration du job</p>
+			</div>
 		</div>
-	</div>
-	<div>
-		<div><pre>
+		<div>
+			<div><pre>
 <code>node {
   git url: 'https://github.com/spring-projects/spring-petclinic.git'
   def mvnHome = tool 'M3'
   sh "${mvnHome}/bin/mvn -B verify"
 }</code>
-		</pre></div>
-	</div>
-</section><section class="has-light-background" data-background-color="#d9ead3"><div>
-<div>
-	<h2>Jenkinsfile</h2>
-</div>
-</div>
-<div>
-	<div>
-		<ul>
-			<li>Le base de code déclare elle-même comment s'installer</li>
-			<li>Différentes versions (tags/branches/commits) peuvent avoir des manières différentes de s'installer</li>
-		</ul>
-	</div>
-</div>
-<div>
-	<div><pre>
+			</pre></div>
+		</div>
+	</section>
+	<section class="has-light-background" data-background-color="#d9ead3">
+		<div>
+			<div>
+				<h2>Jenkinsfile</h2>
+			</div>
+			</div>
+			<div>
+				<div>
+					<ul>
+						<li>Le base de code déclare elle-même comment s'installer</li>
+						<li>Différentes versions (tags/branches/commits) peuvent avoir des manières différentes de s'installer</li>
+					</ul>
+				</div>
+			</div>
+			<div>
+				<div><pre>
 <code>node {
   git url: 'https://github.com/spring-projects/spring-petclinic.git'
   def mvnHome = tool 'M3'
   sh "${mvnHome}/bin/mvn -B verify"
 }</code>
-	</pre></div>
-</div>
-</section>
-<section>
-	<div>
-		<div>
-			<h1>Actions disponibles</h1>
-		</div>
-	</div>
-</section>
-<section>
-	<div>
-		<div>
-			<h1>Echo (print)</h1>
-		</div>
-	</div>
-	<div>
-		<div><pre><code>echo 'Compilation'</code></pre></div>
-	</div>
-</section>
-<section>
-	<div>
-		<div>
-			<h1>Commande shell</h1>
-		</div>
-	</div>
-	<div>
-		<div><pre><code>sh 'ls /tmp'</code></pre></div>
-	</div>
-	<div>
-		<div><pre><code>bat 'dir C:\tmp'</code></pre></div>
-	</div>
-</section>
-<section>
-	<div>
-		<div>
-			<h1>try-catch-finally</h1>
-		</div>
-	</div>
-	<div>
-		<div><pre>
+				</pre></div>
+			</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h1>Actions disponibles</h1>
+					</div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h1>Echo (print)</h1>
+					</div>
+				</div>
+				<div>
+					<div><pre><code>echo 'Compilation'</code></pre></div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h1>Commande shell</h1>
+					</div>
+				</div>
+				<div>
+					<div><pre><code>sh 'ls /tmp'</code></pre></div>
+				</div>
+				<div>
+					<div><pre><code>bat 'dir C:\tmp'</code></pre></div>
+				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h1>try-catch-finally</h1>
+					</div>
+				</div>
+				<div>
+					<div><pre>
 <code>try {
-    checkpoint('Before production')
-  } catch (NoSuchMethodError _) {
-    echo 'Checkpoint feature available in CloudBees Jenkins Enterprise.'
+  checkpoint('Before production')
+} catch (NoSuchMethodError _) {
+  echo 'Checkpoint feature available in CloudBees Jenkins Enterprise.'
 }</code>
-		</pre></div>
-</div>
-</section>
-<section>
-	<div>
-		<div>
-			<h1>Outils</h1>
-		</div>
-	</div>
-	<div>
-		<div><pre>
+					</pre></div>
+			</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h1>Outils</h1>
+					</div>
+				</div>
+				<div>
+					<div><pre>
 <code>def mvn(args) {
   sh "${tool 'Maven 3.x'}/bin/mvn ${args}"
 }
 
 mvn 'clean install'</code>
-		</pre></div>
-	</div>
-</section>
-<section>
-	<div>
-		<div>
-			<h1>Validation humaine</h1>
-		</div>
-	</div>
-	<div>
-		<div><pre class="actionscript"><code>input 'Est-ce que la page ${url} est correcte ?'</code></pre></div>
-	</div>
-	<div>
-		<div>
-			<p>Image du pause for input</p>
-		</div>
-	</div>
-</section>
-<section>
-	<div>
-		<div>
-			<h1>Choix du node d'exécution</h1>
-		</div>
-	</div>
-	<div>
-		<div><pre class="bash">
+</pre></div>
+					</div>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h1>Validation humaine</h1>
+						</div>
+					</div>
+					<div>
+						<div><pre class="actionscript"><code>input 'Est-ce que la page ${url} est correcte ?'</code></pre></div>
+					</div>
+					<div>
+						<div>
+							<p>Image du pause for input</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h1>Choix du node d'exécution</h1>
+						</div>
+					</div>
+					<div>
+						<div><pre class="bash">
 <code>node('unix &amp;&amp; 64bit') {
   sh 'make install'
 }</code>
-		</pre></div>
-	</div>
-</section>
-<section>
-	<div>
-		<div>
-			<h1>Paramètres</h1>
-		</div>
-	</div>
-	<div>
-		<div>
-			<h2>Variables d'environnement</h2>
-			<p>$VAR en shell</p>
-			<p>env.VAR en groovy</p>
-		</div>
-	</div>
-</section>
-<section>
-	<div>
-		<div>
-			<h1>Parallèlisation</h1>
-		</div>
-	</div>
-</section>
-<section>
-	<div>
-		<div>
-			<h2>Parallel</h2>
-		</div>
-	</div>
-	<div>
-		<div><pre>
+						</pre></div>
+					</div>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h1>Paramètres</h1>
+						</div>
+					</div>
+					<div>
+						<div>
+							<h2>Variables d'environnement</h2>
+							<p>$VAR en shell</p>
+							<p>env.VAR en groovy</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h1>Parallèlisation</h1>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h2>Parallel</h2>
+						</div>
+					</div>
+					<div>
+						<div><pre>
 <code>for (int i = 0; i &lt; splits.size(); i++) {
   branches["split${i}"] = {
     node('remote') {
@@ -507,98 +538,98 @@ mvn 'clean install'</code>
     }
   }
 }
-parallel branches</code></pre></div>
-</div>
-<div>
-	<div>
-		<ul>
-			<li>parallel prend une map en paramètre</li>
-			<li>la clé représente le nom de la branche</li>
-			<li>la valeur correspond au bloc de code à exécuter</li>
-		</ul>
-	</div>
-</div>
-</section>
-<section>
-	<div>
-		<div>
-			<h2>Stage</h2>
-		</div>
-	</div>
-	<div>
-		<div><pre>
+parallel branches</code>
+						</pre></div>
+					</div>
+					<div>
+						<div>
+							<ul>
+								<li>parallel prend une map en paramètre</li>
+								<li>la clé représente le nom de la branche</li>
+								<li>la valeur correspond au bloc de code à exécuter</li>
+							</ul>
+						</div>
+					</div>
+					</section>
+					<section>
+						<div>
+							<div>
+								<h2>Stage</h2>
+							</div>
+						</div>
+						<div>
+							<div><pre>
 <code>stage 'build'
-  sh "${tool 'M3'}/bin/mvn clean install"
-  stage concurrency: 1, name: 'deploy'
-  sh 'mv target/app.war /tmp/webapps/'
+sh "${tool 'M3'}/bin/mvn clean install"
+stage concurrency: 1, name: 'deploy'
+sh 'mv target/app.war /tmp/webapps/'
 </code>
-		</pre></div>
-	</div>
-	<div>
-		<div>
-			<ul>
-				<li>Permet de séparer le phases du job</li>
-				<li>Permet de limiter le nombre d'exécutions parallèles</li>
-			</ul>
-		</div>
-	</div>
-</section>
-<section>
-	<div>
-		<div>
-			<h2>Stage</h2>
-		</div>
-	</div>
-	<div>
-		<div><pre>
+							</pre></div>
+						</div>
+						<div>
+							<div>
+								<ul>
+									<li>Permet de séparer le phases du job</li>
+									<li>Permet de limiter le nombre d'exécutions parallèles</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section>
+						<div>
+							<div>
+								<h2>Stage</h2>
+							</div>
+						</div>
+						<div>
+							<div><pre>
 <code>stage 'build'
-  sh "${tool 'M3'}/bin/mvn clean install"
-  stage name: 'deploy', concurrency: 1
-  sh 'mv target/app.war /tmp'
+sh "${tool 'M3'}/bin/mvn clean install"
+stage name: 'deploy', concurrency: 1
+sh 'mv target/app.war /tmp'
 </code>
-		</pre></div>
-	</div>
-	<div>
-		<div>
-			<ul>
-				<li>Tant que le stage deploy n'est pas terminé, les exécutions suivantes s'arrêtent avant deploy</li>
-				<li>Si plusieurs exécutions sont en attente de deploy, c'est la dernière qui est retenue.</li>
-			</ul>
-		</div>
-	</div>
-</section>
+							</pre></div>
+						</div>
+						<div>
+							<div>
+								<ul>
+									<li>Tant que le stage deploy n'est pas terminé, les exécutions suivantes s'arrêtent avant deploy</li>
+									<li>Si plusieurs exécutions sont en attente de deploy, c'est la dernière qui est retenue.</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
 
-</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
 
-</div>
+		<script>
 
-<script src="lib/js/head.min.js"></script>
-<script src="js/reveal.js"></script>
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
 
-<script>
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-					// Full list of configuration options available at:
-					// https://github.com/hakimel/reveal.js#configuration
-					Reveal.initialize({
-						controls: true,
-						progress: true,
-						history: true,
-						center: true,
+			// Optional reveal.js plugins
+			dependencies: [
+			{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: 'plugin/zoom-js/zoom.js', async: true },
+			{ src: 'plugin/notes/notes.js', async: true }
+			]
+		});
 
-						transition: 'slide', // none/fade/slide/convex/concave/zoom
+	</script>
 
-						// Optional reveal.js plugins
-						dependencies: [
-						{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-						{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-						{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-						{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-						{ src: 'plugin/zoom-js/zoom.js', async: true },
-						{ src: 'plugin/notes/notes.js', async: true }
-						]
-					});
 
-				</script>
-
-			</body>
-			</html>
+</body>
+</html>
