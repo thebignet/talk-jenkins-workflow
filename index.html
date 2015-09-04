@@ -15,6 +15,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/reveal-override.css">
 	<link rel="stylesheet" href="css/theme/black.css" id="theme">
 
 	<!-- Code syntax highlighting -->
@@ -190,7 +191,7 @@
 			<section class="has-light-background" data-background-color="#ffe599">
 				<div>
 					<div>
-						<h1>Avec le pipeline plugin !</h1>
+						<h1>Pipeline plugin !</h1>
 						<p><img src="img/pipeline.png" width="75%" style="border:none; box-shadow:none; background: none;"/></p>
 					</div>
 				</div>
@@ -215,14 +216,6 @@
 				<div>
 					<div>
 						<p><span>Solution peu utilisable pour du déploiement continu</span></p>
-					</div>
-				</div>
-			</section>
-			<section>
-				<div>
-					<div>
-						<h1>Jenkins et le déploiement continu</h1>
-						<p><img src="img/jenkinsNinja.png" width="25%" style="border:none; box-shadow:none; background: none;"/></p>
 					</div>
 				</div>
 			</section>
@@ -267,9 +260,16 @@
 						</ul>
 					</div>
 				</div>
+			</section>
+			<section>
 				<div>
 					<div>
-						<p>Capture d'écran de Go Delivery</p>
+						<h2>Go Delivery</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p><img src="img/goDeliveryBuild.png" width="75%" style="border:none; box-shadow:none; background: none;"/></p>
 					</div>
 				</div>
 			</section>
@@ -285,6 +285,7 @@
 							<li>Parallelisation des étapes</li>
 							<li>Environnements de déploiement</li>
 							<li>Visualisation du build et de l'étape en cours</li>
+							<li>Possibilité d'avoir plusieurs repositories en entrée</li>
 						</ul>
 					</div>
 				</div>
@@ -306,7 +307,8 @@
 			<section>
 				<div>
 					<div>
-						<h1>Jenkins Workflow plugin</h1>
+						<h1>Jenkins Workflow Plugin</h1>
+						<p><img src="img/jenkinsNinja.png" width="25%" style="border:none; box-shadow:none; background: none;"/></p>
 					</div>
 				</div>
 			</section>
@@ -341,113 +343,136 @@
 						<h2>et mettre le script avec les sources</h2>
 					</div>
 				</div>
-			</section><section class="has-light-background" data-background-color="#d9ead3"><div>
-			<div>
-				<h2>Jenkinsfile</h2>
-			</div>
-		</div>
-		<div>
-			<div>
-				<p>Fichier de build en Groovy</p>
-				<p>Exprimer tout ce que pouvait faire un job simplement</p>
-				<p>Ajouter des principes supplémentaires</p>
-				<p>Convention de nommage pour éviter d'indiquer le nom en configuration du job</p>
-			</div>
-		</div>
-		<div>
-			<div><pre>
-<code>node {
-  git url: 'https://github.com/spring-projects/spring-petclinic.git'
-  def mvnHome = tool 'M3'
-  sh "${mvnHome}/bin/mvn -B verify"
-}</code>
-			</pre></div>
-		</div>
-	</section>
-	<section class="has-light-background" data-background-color="#d9ead3">
-		<div>
-			<div>
-				<h2>Jenkinsfile</h2>
-			</div>
-			</div>
-			<div>
-				<div>
-					<ul>
-						<li>Le base de code déclare elle-même comment s'installer</li>
-						<li>Différentes versions (tags/branches/commits) peuvent avoir des manières différentes de s'installer</li>
-					</ul>
-				</div>
-			</div>
-			<div>
-				<div><pre>
-<code>node {
-  git url: 'https://github.com/spring-projects/spring-petclinic.git'
-  def mvnHome = tool 'M3'
-  sh "${mvnHome}/bin/mvn -B verify"
-}</code>
-				</pre></div>
-			</div>
 			</section>
-			<section>
+			<section class="has-light-background" data-background-color="#d9ead3">
 				<div>
 					<div>
-						<h1>Actions disponibles</h1>
-					</div>
-				</div>
-			</section>
-			<section>
-				<div>
-					<div>
-						<h1>Echo (print)</h1>
+						<h2>Jenkinsfile</h2>
 					</div>
 				</div>
 				<div>
-					<div><pre><code>echo 'Compilation'</code></pre></div>
-				</div>
-			</section>
-			<section>
-				<div>
 					<div>
-						<h1>Commande shell</h1>
-					</div>
-				</div>
-				<div>
-					<div><pre><code>sh 'ls /tmp'</code></pre></div>
-				</div>
-				<div>
-					<div><pre><code>bat 'dir C:\tmp'</code></pre></div>
-				</div>
-			</section>
-			<section>
-				<div>
-					<div>
-						<h1>try-catch-finally</h1>
+						<p>Fichier de build en Groovy</p>
+						<p>Du build au deploy dans un fichier compréhensible</p>
+						<p>Permet une orchestration plus avancée</p>
+						<p>Convention de nommage pour éviter d'indiquer le nom en configuration du job</p>
 					</div>
 				</div>
 				<div>
 					<div><pre>
+<code>node {
+  git url: 'https://github.com/spring-projects/spring-petclinic.git'
+  def mvnHome = tool 'M3'
+  sh "${mvnHome}/bin/mvn -B verify"
+}</code>
+					</pre></div>
+				</div>
+			</section>
+			<section class="has-light-background" data-background-color="#d9ead3">
+				<div>
+					<div>
+						<h2>Jenkinsfile</h2>
+					</div>
+				</div>
+				<div>
+					<div>
+						<ul>
+							<li>Le base de code déclare elle-même comment s'installer</li>
+							<li>Différentes versions (tags/branches/commits) peuvent avoir des manières différentes de s'installer</li>
+						</ul>
+					</div>
+				</div>
+				<div>
+					<div><pre>
+<code>node {
+  git url: 'https://github.com/spring-projects/spring-petclinic.git'
+  def mvnHome = tool 'M3'
+  sh "${mvnHome}/bin/mvn -B verify"
+}</code>
+					</pre></div>
+				</div>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h1>Actions disponibles</h1>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h1>Echo (print)</h1>
+						</div>
+					</div>
+					<div>
+						<div><pre><code>echo 'Compilation'</code></pre></div>
+					</div>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h1>Commande shell</h1>
+						</div>
+					</div>
+					<div>
+						<div><pre><code>sh 'ls /tmp'</code></pre></div>
+					</div>
+					<div>
+						<div><pre><code>bat 'dir C:\tmp'</code></pre></div>
+					</div>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h1>try-catch-finally</h1>
+						</div>
+					</div>
+					<div>
+						<div><pre>
 <code>try {
   checkpoint('Before production')
 } catch (NoSuchMethodError _) {
   echo 'Checkpoint feature available in CloudBees Jenkins Enterprise.'
 }</code>
-					</pre></div>
-			</div>
-			</section>
-			<section>
-				<div>
-					<div>
-						<h1>Outils</h1>
+						</pre></div>
 					</div>
-				</div>
-				<div>
-					<div><pre>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h1>for-loops</h1>
+						</div>
+					</div>
+					<div>
+						<div><pre>
+<code>files.each{ file ->
+  sh "check.sh $file"
+}
+</code>
+						</pre></div>
+						<div><pre>
+<code>for num in 1..10
+  sh "echo $num"
+}
+</code>
+						</pre></div>
+					</div>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h1>Outils</h1>
+						</div>
+					</div>
+					<div>
+						<div><pre>
 <code>def mvn(args) {
   sh "${tool 'Maven 3.x'}/bin/mvn ${args}"
 }
 
 mvn 'clean install'</code>
-</pre></div>
+						</pre></div>
 					</div>
 				</section>
 				<section>
@@ -460,9 +485,7 @@ mvn 'clean install'</code>
 						<div><pre class="actionscript"><code>input 'Est-ce que la page ${url} est correcte ?'</code></pre></div>
 					</div>
 					<div>
-						<div>
-							<p>Image du pause for input</p>
-						</div>
+						<p><img src="img/workflow/02-pauseInput.png" width="75%" style="border:none; box-shadow:none; background: none;"/></p>
 					</div>
 				</section>
 				<section>
@@ -528,57 +551,102 @@ parallel branches</code>
 							</ul>
 						</div>
 					</div>
-					</section>
-					<section>
+				</section>
+				<section>
+					<div>
 						<div>
-							<div>
-								<h2>Stage</h2>
-							</div>
+							<h2>Stage</h2>
 						</div>
+					</div>
+					<div>
 						<div>
-							<div><pre>
+							<ul>
+								<li>Permet de séparer le phases du job</li>
+								<li>Permet de limiter le nombre d'exécutions parallèles</li>
+							</ul>
+						</div>
+						<div><pre>
 <code>stage 'build'
 sh "${tool 'M3'}/bin/mvn clean install"
 stage concurrency: 1, name: 'deploy'
 sh 'mv target/app.war /tmp/webapps/'
 </code>
-							</pre></div>
-						</div>
+						</pre></div>
+					</div>
+					<div>
+						<p><img src="img/workflow/03-buildDeployConcurrent.png" width="60%" style="border:none; box-shadow:none; background: none;"/></p>
+					</div>
+				</section>
+				<section>
+					<div>
 						<div>
-							<div>
-								<ul>
-									<li>Permet de séparer le phases du job</li>
-									<li>Permet de limiter le nombre d'exécutions parallèles</li>
-								</ul>
-							</div>
+							<h2>Stage</h2>
 						</div>
-					</section>
-					<section>
-						<div>
-							<div>
-								<h2>Stage</h2>
-							</div>
-						</div>
-						<div>
-							<div><pre>
+					</div>
+					<div>
+						<div><pre>
 <code>stage 'build'
 sh "${tool 'M3'}/bin/mvn clean install"
 stage name: 'deploy', concurrency: 1
 sh 'mv target/app.war /tmp'
 </code>
-							</pre></div>
-						</div>
+						</pre></div>
+					</div>
+					<div>
 						<div>
-							<div>
-								<ul>
-									<li>Tant que le stage deploy n'est pas terminé, les exécutions suivantes s'arrêtent avant deploy</li>
-									<li>Si plusieurs exécutions sont en attente de deploy, c'est la dernière qui est retenue.</li>
-								</ul>
-							</div>
+							<ul>
+								<li>Tant que le stage deploy n'est pas terminé, les exécutions suivantes s'arrêtent avant deploy</li>
+								<li>Si plusieurs exécutions sont en attente de deploy, c'est la dernière qui est retenue.</li>
+							</ul>
 						</div>
-					</section>
-				</div>
+					</div>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h2>Chargement d'un fichier de script</h2>
+						</div>
+					</div>
+					<div>
+						<div><pre>
+<code>node{
+  def install = load 'install.groovy'
+  install.main()
+}</code>
+						</pre></div>
+					</div>
+					<div>
+						<p>Permet de diviser le script de build en plusieurs parties</p>
+					</div>
+				</section>
+				<section>
+					<div>
+						<div>
+							<h2>Longue installation</h2>
+						</div>
+					</div>
+					<div>
+						<ul>
+							<li>Les build de Workflow survivent à un redémarrage de Jenkins</li>
+							<li>Le thread d'orchestration ne s'exécute que pour lancer la prochaine tache</li>
+						</ul>
+					</div>
+				</section>
+				<section class="has-light-background" data-background-color="#ffffff">
+					<h2>Questions ?</h2>
+					<ul>
+						<li><img class="no-shadow inline" src="img/twitter-logo.png" style="height:1em"/> <a href="https://twitter.com/thebignet">@thebignet</a></li>
+						<li><img class="no-shadow inline" src="img/googleplus-logo.png" style="height:1em"/> <a href="https://plus.google.com/+JeanDetoeuf">thebignet</a></li>
+						<li>
+							<div>
+								<img class="no-shadow inline" src="img/github-logo.png" style="height:1em"/> <a href="https://github.com/thebignet">thebignet</a>
+							</div>
+						</li>
+						<li>Cette présentation : <a href="http://thebignet.github.io/talk-jenkins-workflow/">talk-jenkins-workflow</a></li>
+					</ul>
+				</section>
 			</div>
+		</div>
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
