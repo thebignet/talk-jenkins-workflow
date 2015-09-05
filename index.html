@@ -60,7 +60,7 @@
 				<div>
 					<div>
 						<p>Passionné de nouvelles technologies</p>
-						<p>#jvm #docker #craftmanship #diy</p>
+						<p>#jvm #docker #craftmanship #rpi #diy</p>
 					</div>
 				</div>
 				<div>
@@ -78,8 +78,9 @@
 				<div>
 					<div>
 						<ul>
-							<li>Intégration continue</li>
-							<li>Déploiement continu</li>
+							<li class="fragment" data-fragment-index="0">Intégration continue</li>
+							<li class="fragment" data-fragment-index="1">Livraison continue</li>
+							<li class="fragment" data-fragment-index="2">Déploiement continu</li>
 						</ul>
 					</div>
 				</div>
@@ -228,7 +229,7 @@
 				<div>
 					<div>
 						<p>Le but du déploiement continu est d'avoir une application stable en production.</p>
-						<p>Pour ce faire, la chaine de livraison doit être automatisée au maximum pour réduire le travail entre une modification de code et sa livraison en production.</p>
+						<p>La chaine de livraison doit être automatisée au maximum pour réduire le travail entre une modification de code et sa livraison en production.</p>
 					</div>
 				</div>
 			</section>
@@ -324,11 +325,7 @@
 							<li>Ajout à une installation existante</li>
 							<li>Nouveau type de job</li>
 						</ul>
-					</div>
-				</div>
-				<div>
-					<div>
-						<p>image de configuration de workflow</p>
+						<p><img src="img/workflow/00-newJob.png" width="50%" style="border:none; box-shadow:none; background: none;"/></p>
 					</div>
 				</div>
 			</section>
@@ -355,7 +352,7 @@
 						<p>Fichier de build en Groovy</p>
 						<p>Du build au deploy dans un fichier compréhensible</p>
 						<p>Permet une orchestration plus avancée</p>
-						<p>Convention de nommage pour éviter d'indiquer le nom en configuration du job</p>
+						<p>Convention de nommage : Jenkinsfile</p>
 					</div>
 				</div>
 				<div>
@@ -395,7 +392,7 @@
 				<section>
 					<div>
 						<div>
-							<h1>Actions disponibles</h1>
+							<h1>Actions fournies par Workflow</h1>
 						</div>
 					</div>
 				</section>
@@ -486,6 +483,7 @@ mvn 'clean install'</code>
 					</div>
 					<div>
 						<p><img src="img/workflow/02-pauseInput.png" width="75%" style="border:none; box-shadow:none; background: none;"/></p>
+						<p>Si cette validation intervient avant le déploiement, on fait de la livraison continue</p>
 					</div>
 				</section>
 				<section>
@@ -573,9 +571,6 @@ sh 'mv target/app.war /tmp/webapps/'
 </code>
 						</pre></div>
 					</div>
-					<div>
-						<p><img src="img/workflow/03-buildDeployConcurrent.png" width="60%" style="border:none; box-shadow:none; background: none;"/></p>
-					</div>
 				</section>
 				<section>
 					<div>
@@ -604,6 +599,16 @@ sh 'mv target/app.war /tmp'
 				<section>
 					<div>
 						<div>
+							<h2>Stage</h2>
+						</div>
+					</div>
+					<div>
+						<p><img src="img/workflow/03-buildDeployConcurrent.png" width="60%" style="border:none; box-shadow:none; background: none;"/></p>
+					</div>
+				</section>
+				<section>
+					<div>
+						<div>
 							<h2>Chargement d'un fichier de script</h2>
 						</div>
 					</div>
@@ -627,13 +632,16 @@ sh 'mv target/app.war /tmp'
 					</div>
 					<div>
 						<ul>
-							<li>Les build de Workflow survivent à un redémarrage de Jenkins</li>
+							<li>Les builds de Workflow survivent à un redémarrage de Jenkins</li>
 							<li>Le thread d'orchestration ne s'exécute que pour lancer la prochaine tache</li>
 						</ul>
 					</div>
 				</section>
 				<section class="has-light-background" data-background-color="#ffffff">
 					<h2>Questions ?</h2>
+				</section>
+				<section class="has-light-background" data-background-color="#ffffff">
+					<h2>Merci pour votre écoute</h2>
 					<ul>
 						<li><img class="no-shadow inline" src="img/twitter-logo.png" style="height:1em"/> <a href="https://twitter.com/thebignet">@thebignet</a></li>
 						<li><img class="no-shadow inline" src="img/googleplus-logo.png" style="height:1em"/> <a href="https://plus.google.com/+JeanDetoeuf">thebignet</a></li>
