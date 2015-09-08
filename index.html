@@ -89,6 +89,7 @@
 					<li class="fragment" data-fragment-index="3">Open Source</li>
 					<li class="fragment" data-fragment-index="4">Communauté</li>
 					<li class="fragment" data-fragment-index="5">Livraisons régulières</li>
+					<li class="fragment" data-fragment-index="6">Vieillissant par rapport à la concurrence ?</li>
 				</ul>
 			</section>
 			<section class="has-light-background" data-background-color="#a3f7ba">
@@ -188,13 +189,11 @@
 				<p>Du build au deploy dans un fichier compréhensible</p>
 				<p>Permet une orchestration plus avancée</p>
 				<p>Convention de nommage : Jenkinsfile</p>
-				<pre>
-<code>node {
+<pre><code>node {
   git url: 'https://github.com/spring-projects/spring-petclinic.git'
   def mvnHome = tool 'M3'
   sh "${mvnHome}/bin/mvn -B verify"
-}</code>
-				</pre>
+}</code></pre>
 			</section>
 			<section class="has-light-background" data-background-color="#d9ead3">
 				<h2>Jenkinsfile</h2>
@@ -202,13 +201,11 @@
 					<li>Le base de code déclare elle-même comment s'installer</li>
 					<li>Différentes versions (tags/branches/commits) peuvent avoir des manières différentes de s'installer</li>
 				</ul>
-				<pre>
-<code>node {
+<pre><code>node {
   git url: 'https://github.com/spring-projects/spring-petclinic.git'
   def mvnHome = tool 'M3'
   sh "${mvnHome}/bin/mvn -B verify"
-}</code>
-				</pre>
+}</code></pre>
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
 					<h1>Actions fournies par Workflow</h1>
@@ -221,42 +218,34 @@
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
 					<h1>Echo (print)</h1>
-					<pre><code>echo 'Compilation'</code></pre>
+					<pre class="bash"><code>echo 'Compilation'</code></pre>
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
 					<h1>try-catch-finally</h1>
-					<pre>
-<code>try {
+<pre><code>try {
   checkpoint('Before production')
 } catch (NoSuchMethodError _) {
   echo 'Checkpoint feature available in CloudBees Jenkins Enterprise.'
-}</code>
-					</pre>
+}</code></pre>
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
 					<h1>for-loops</h1>
-					<pre>
-<code>files.each{ file ->
+<pre><code>files.each{ file ->
   sh "check.sh $file"
 }
-</code>
-					</pre>
-					<pre>
-<code>for num in 1..10
+</code></pre>
+<pre><code>for num in 1..10
   sh "echo $num"
 }
-</code>
-					</pre>
+</code></pre>
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
 					<h1>Outils</h1>
-					<pre>
-<code>def mvn(args) {
+<pre><code>def mvn(args) {
   sh "${tool 'Maven 3.x'}/bin/mvn ${args}"
 }
 
-mvn 'clean install'</code>
-					</pre>
+mvn 'clean install'</code></pre>
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
 					<h1>Validation humaine</h1>
@@ -266,25 +255,22 @@ mvn 'clean install'</code>
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
 					<h1>Choix du noeud d'exécution</h1>
-					<pre class="bash">
-<code>node('unix &amp;&amp; 64bit') {
+<pre class="bash"><code>node('unix &amp;&amp; 64bit') {
   sh 'make install'
-}</code>
-					</pre>
+}</code></pre>
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
 					<h1>Paramètres</h1>
 					<h2>Exposées sous forme de variables d'environnement</h2>
-					<p>Shell<pre>$VAR</pre></p>
-					<p>Groovy<pre>env.VAR</pre></p>
+					<p>Shell<pre><code>$VAR</code></pre></p>
+					<p>Groovy<pre><code>env.VAR</code></pre></p>
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
 					<h1>Parallèlisation</h1>
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
 					<h2>Parallel</h2>
-					<pre>
-<code>for (int i = 0; i &lt; splits.size(); i++) {
+<pre><code>for (int i = 0; i &lt; splits.size(); i++) {
   branches["split${i}"] = {
     node('remote') {
       sh 'rm -rf *'
@@ -292,8 +278,7 @@ mvn 'clean install'</code>
     }
   }
 }
-parallel branches</code>
-					</pre>
+parallel branches</code></pre>
 					<ul>
 						<li>parallel prend une map en paramètre</li>
 						<li>la clé représente le nom de la branche</li>
@@ -310,23 +295,19 @@ parallel branches</code>
 						<li>Permet de séparer le phases du job</li>
 						<li>Permet de limiter le nombre d'exécutions parallèles</li>
 					</ul>
-					<pre>
-<code>stage 'build'
+<pre><code>stage 'build'
 sh "${tool 'M3'}/bin/mvn clean install"
 stage concurrency: 1, name: 'deploy'
 sh 'mv target/app.war /tmp/webapps/'
-</code>
-					</pre>
+</code></pre>
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
 					<h2>Stage</h2>
-					<pre>
-<code>stage 'build'
+<pre><code>stage 'build'
 sh "${tool 'M3'}/bin/mvn clean install"
 stage name: 'deploy', concurrency: 1
 sh 'mv target/app.war /tmp'
-</code>
-					</pre>
+</code></pre>
 					<ul>
 						<li>Tant que le stage deploy n'est pas terminé, les exécutions suivantes s'arrêtent avant deploy</li>
 						<li>Si plusieurs exécutions sont en attente de deploy, c'est la dernière qui est retenue.</li>
@@ -338,17 +319,16 @@ sh 'mv target/app.war /tmp'
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
 					<h2>Chargement d'un fichier de script</h2>
-					<pre>
-<code>node{
+<pre><code>node{
   def install = load 'install.groovy'
   install.main()
-}</code>
-					</pre>
+}</code></pre>
 					<p>Permet de diviser le script de build en plusieurs parties</p>
 				</section>
 				<section class="has-light-background" data-background-color="#e0a3f7">
 					<h2>Suivi à l'IHM : Open Source</h2>
-					<p><img src="img/workflow/steps.png" width="75%" style="border:none; box-shadow:none; background: none;"/></p>
+					<p><img src="img/workflow/steps.png" width="60%" style="border:none; box-shadow:none; background: none;"/></p>
+					<p>Liens pour afficher les logs de chaque étape</p>
 				</section>
 				<section class="has-light-background" data-background-color="#e0a3f7">
 					<h2>Suivi à l'IHM : Cloudbees Edition</h2>
@@ -359,6 +339,15 @@ sh 'mv target/app.war /tmp'
 					<ul>
 						<li>Les builds de Workflow survivent à un redémarrage de Jenkins</li>
 						<li>Le thread d'orchestration ne s'exécute que pour lancer la prochaine tache</li>
+					</ul>
+				</section>
+				<section class="has-light-background" data-background-color="#a3e2f7">
+					<h2>Résumé</h2>
+					<ul>
+						<li>Une orchestration intégrée à la base de code</li>
+						<li>Un langage expressif (DSL workflow et Groovy)</li>
+						<li>Parallèlisation et distribution des tâches</li>
+						<li>Pipeline de déploiement continu</li>
 					</ul>
 				</section>
 				<section class="has-light-background" data-background-color="#ffffff">
