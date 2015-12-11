@@ -367,7 +367,83 @@ sh 'mv target/app.war /tmp'
 					<p>On peut utiliser un hook pour lancer les builds</p>
 				</section>
 				<section class="has-light-background" data-background-color="#a3e2f7">
-					<h2>Docker</h2>
+					<h2>Jenkins Slaves</h2>
+					<p>Besoin d'installer des outils</p>
+					<p>Le bon JDK, la version de Maven qu'il me faut, gradle ? sbt ? compilateur ?</p>
+				</section>
+				<section class="has-light-background" data-background-color="#a3e2f7">
+					<h2>Docker to the rescue !</h2>
+					<p><img src="img/docker-jenkins.png" width="75%" style="border:none; box-shadow:none; background: none;"/></p>
+					<p><small>Docker est la solution à tout de toutes manières</small></p>
+				</section>
+				<section class="has-light-background" data-background-color="#a3e2f7">
+					<h2>Workflow dans une image docker</h2>
+<pre><code>docker.image('maven:3.3.3-jdk-8').inside {
+  sh 'mvn -B clean install'
+}</code></pre>
+					<p>Le répertoire courant dans docker est le workspace Jenkins</p>
+					<p>Montage du workspace dans un volume docker</p>
+					<p>Plus de problèmes d'outils, mis à part Docker qui doit être installé sur les slaves</p>
+					<p>Le container est supprimé après son exécution</p>
+				</section>
+				<section class="has-light-background" data-background-color="#a3e2f7">
+					<h2>Faire des images Docker dans Jenkins</h2>
+					<p><img src="img/poule.jpg"/></p>
+				</section>
+				<section class="has-light-background" data-background-color="#a3e2f7">
+					<h2>Docker build</h2>
+<pre><code>node {
+  git scm // Récupérer le repository git en mode multibranch
+  def myEnv = docker.build 'my-environment:snapshot'
+  myEnv.push()
+}</code></pre>
+				</section>
+				<section class="has-light-background" data-background-color="#a3e2f7">
+					<h2>Docker build</h2>
+<pre><code>node {
+  git scm // Récupérer le repository git en mode multibranch
+  def myEnv = docker.build "my-environment:${env.BUILD_TAG}"
+  myEnv.push()
+}</code></pre>
+					<p>Utilisation du tag git pour pousser dans le registry</p>
+				</section>
+				<section class="has-light-background" data-background-color="#a3e2f7">
+					<h2>Docker pour tester</h2>
+<pre><code>node {
+  git scm
+  docker.image('mysql').withRun('-p 81:3126') {c ->
+    sh './test-with-local-db'
+  }
+}</code></pre>
+					<p>On veut exécuter le corps du withRun alors que l'image mysql tourne</p>
+					<p>Le withRun prend optionnellement les paramètres du docker run</p>
+					<p>Adapté aux tests d'intégration</p>
+				</section>
+				<section class="has-light-background" data-background-color="#a3e2f7">
+					<h2>Docker registry</h2>
+<pre><code>node {
+  docker.withRegistry('https://docker.mycorp.com/', 'docker-login'){
+    git scm
+    docker.build('myapp').push('latest')
+  }
+}</code></pre>
+					<p>Possibilité d'utiliser un registry privé</p>
+					<p>On passe des credentials enregistrés dans Jenkins</p>
+				</section>
+				<section class="has-light-background" data-background-color="#a3e2f7">
+					<h2>Docker server</h2>
+<pre><code>docker.withServer('tcp://swarm.mycorp.com:2376', 'swarm-certs'){
+  docker.image('httpd').withRun('-p 8080:80') {c ->
+    sh "curl -i http://${hostIp(c)}:8080/"
+  }
+}
+def hostIp(container) {
+  sh "docker inspect -f {{.Node.Ip}} ${container.id} > hostIp"
+  readFile('hostIp').trim()
+}</code></pre>
+					<p>Possibilité de déléguer à un serveur docker (swarm ou autre)</p>
+					<p>Le client docker doit être installé</p>
+					<p>A utiliser si le slave ne peut pas supporter l'application à tester</p>
 				</section>
 				<section class="has-light-background" data-background-color="#ffffff">
 					<h2>Questions ?</h2>
